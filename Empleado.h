@@ -5,20 +5,22 @@
 #include <cstring>
 #include <limits>
 #include <string.h>
+#include <list>
 #pragma warning (disable : 4996)
 #pragma pack(1)
-//15*3+20+4
+
 #define MAX_BUFFER 100
 
 using namespace std;
 
 class Empleado {
 private:
-	void Pack();
-	void unPack();
+	
 	
 
 public:
+	void Pack();
+	void unPack();
 	int SIZE;
 	char in_buffer[MAX_BUFFER];
 	char cedula[13];
@@ -39,9 +41,6 @@ public:
 	int buscarEmpleado(const char*);
 	void EliminarRegistro();
 	void Compactar();
+	void index();
 	
-};
-
-class strctIndice {
-
 };
