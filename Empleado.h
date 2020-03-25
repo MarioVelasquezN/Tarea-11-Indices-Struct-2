@@ -16,8 +16,7 @@ class Empleado {
 private:
 	void Pack();
 	void unPack();
-	//int copy2Buffer(char*);
-	//int copyFromBuffer(char *, char*);
+	
 
 public:
 	int SIZE;
@@ -31,7 +30,7 @@ public:
 	char zipCode[4];
 
 	Empleado();
-	//~Empleado();
+	
 
 	void Print();
 	void setBBuffer(const char*);
@@ -41,4 +40,8 @@ public:
 	void EliminarRegistro();
 	void Compactar();
 	
+};
+
+class strctIndice {
+
 };
