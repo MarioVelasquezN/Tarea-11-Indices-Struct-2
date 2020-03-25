@@ -1,8 +1,8 @@
 #include <limits>
 #include <fstream>
 #include <inttypes.h>
-
 #include "Empleado.h"
+#include "indice.h"
 
 using namespace std;
 #pragma warning (disable : 4996)
@@ -10,11 +10,9 @@ using namespace std;
 
 void ReadAll() {
 	char buffer[MAX_BUFFER];
-
 	Empleado p;
 	ifstream f;
 	cout << "Cedula	Nombres  Apellidos  Direccion Ciudad Estado ZipCode" << endl;
-
 	f.open("empleado.txt",ios::in);
 	if (f.fail()) {
 		cout << "No encontro el alchivo empleado.txt" << endl;
@@ -32,7 +30,6 @@ void ReadAll() {
 	}
 	f.close();
 }
-
 int WriteAll() {
 	char c[100];
 	c[0] = 0;
@@ -60,23 +57,16 @@ void Empleado::GetEmpleadoByName(string nombre) {
 	Empleado p;
 	int cont = 0;
 	ifstream f;
-
 	f.open("empleado.txt");
 	if (!f) {
 		cout << "Error al abrir el archivo empleado.txt";
 		return;
 	}
-
-	while (cam)
-	{
-	
+	while (cam){
 		f.read(buffer, MAX_BUFFER);
-
 		p.setBBuffer(buffer);
 		cont=f.tellg();
 		if (nombre == p.nombre) {
-		
-
 			p.Print();
 			break;
 		}
@@ -84,56 +74,45 @@ void Empleado::GetEmpleadoByName(string nombre) {
 			f.tellg();
 			cam = true;
 		}
-
 	}
-
 	if (f.eof());
-
 	f.close();
 }
 
-int Empleado::buscarEmpleado(const char* name) {
+int Empleado::buscarEmpleado(const char* ID) {
 	char buffer[MAX_BUFFER];
 	bool cam = true;
 	Empleado p;
 	int cont = 0;
 	ifstream f;
-
-	f.open("empleado.txt");
+	indice i;
+	f.open("indice.txt");
 	if (!f) {
 		cout << "Error al abrir el archivo empleado.txt";
 		return 0;
 	}
-
-	while (!f.eof())
-	{
+	while (!f.eof()){
 		cont = f.tellg();
-		f.read(buffer, MAX_BUFFER);
-		p.setBBuffer(buffer);
-		
-		if (strcmp(name,p.nombre)==0) {
-			return cont;
+		f.read(i.in_buff, 50);
+		i.unPack();
+
+		if (strcmp(ID,i.cedula)==0) {
+			return i.offset;
 		}
 	}
 	return 0;
-
 	f.close();
 }
-
 void Empleado::EliminarRegistro() {
-	
 	fstream ar;
-
 	ar.open("empleado.txt");
 	char aux[30];
 	if (!ar) {
 		cout << "Archivo no encontrado!!";
 		return;
 	}
-
-	cout << "Introduzca un nombre para eliminar: ";
+	cout << "Introduzca un cedula para eliminar: ";
 	cin >> aux;
-
 	if (buscarEmpleado(aux) == -1) {
 		cout << "No se encontro nombre";
 		return;
@@ -143,7 +122,6 @@ void Empleado::EliminarRegistro() {
 		ar.put('*');
 		ar.close();
 	}
-	
 }
 
 void Empleado::Compactar() {
@@ -176,14 +154,48 @@ void Empleado::Compactar() {
 	}
 }
 
+void Empleado::index() {
+	char buff[MAX_BUFFER];
+	char offset[5];
+	//offset[2] = '/0';
+	uint16_t size_off;
+	ifstream leer;
+	ofstream escribir;
+
+	leer.open("empleado.txt");
+	escribir.open("indice.txt", ios::app);
+
+	if (!leer) {
+		cout << "Archivo no pudo leerse!!";
+		return;
+	}
+
+	
+	while (!leer.eof())
+	{
+		int sz = leer.tellg();
+		itoa(sz, offset, 10);
+		leer.read(buff, MAX_BUFFER);
+		if (leer.eof()) break;
+
+		escribir.write(offset, sizeof(sz));
+		//escribir.write(buff, MAX_BUFFER);
+	}
+}
+
 int main(/*int argc, char **argv*/) {
 	Empleado p;
+	indice k;
+	cout << p.buscarEmpleado("958");
 
 	/*if (strcmp(argv[1], "1") == 0)*/ //WriteAll(); 
-	/*if (strcmp(argv[1], "2") == 0)*/ ReadAll();
+	/*if (strcmp(argv[1], "2") == 0)*/ //ReadAll();
 	cout << endl;
 	/*if (strcmp(argv[1], "3") == 0)*/ //p.GetEmpleadoByName("Wilmer");
 	cout << endl;
 	/*if (strcmp(argv[1], "4") == 0)*/ //p.EliminarRegistro();
 	//p.Compactar();
+	//p.indice();
+	////k.crearIndex();
+	k.cargarlista();
 }
