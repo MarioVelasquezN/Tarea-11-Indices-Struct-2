@@ -6,12 +6,11 @@
 
 using namespace std;
 #pragma warning (disable : 4996)
-//_CRT_SECURE_NO_WARNINGS
+
 
 void ReadAll() {
 	char buffer[MAX_BUFFER];
-	//char s[2];
-	//uint16_t r_size;
+
 	Empleado p;
 	ifstream f;
 	cout << "Nombres  Apellidos  Direccion Ciudad Estado ZipCode" << endl;
@@ -24,8 +23,7 @@ void ReadAll() {
 
 	while (1)
 	{
-		//f.read(s, 2);
-		//memcpy(&r_size, s, 2);
+
 		f.read(buffer,MAX_BUFFER);
 		if (f.eof()) break;
 
@@ -58,7 +56,6 @@ int WriteAll() {
 void Empleado::GetEmpleadoByName(string nombre) {
 	char buffer[MAX_BUFFER];
 	bool cam = true;
-	//char s[2];
 	uint16_t r_size;
 	Empleado p;
 	int cont = 0;
@@ -72,14 +69,13 @@ void Empleado::GetEmpleadoByName(string nombre) {
 
 	while (cam)
 	{
-		//f.read(s, 2);
-		//memcpy(&r_size, s, 2);
+	
 		f.read(buffer, MAX_BUFFER);
 
 		p.setBBuffer(buffer);
 		cont=f.tellg();
 		if (nombre == p.nombre) {
-			//cout << "aqui\n";
+		
 
 			p.Print();
 			break;
@@ -125,9 +121,9 @@ int Empleado::buscarEmpleado(const char* name) {
 }
 
 void Empleado::EliminarRegistro() {
-	//char buffer[MAX_BUFFER];
+	
 	fstream ar;
-	//Empleado p;
+
 	ar.open("empleado.txt");
 	char aux[30];
 	if (!ar) {
