@@ -160,7 +160,7 @@ void Empleado::Pack() {
 
 	SIZE = strlen(in_buffer);
 
-	for (size_t i = SIZE; i < 64; i++)
+	for (size_t i = SIZE; i < MAX_BUFFER; i++)
 	{
 		in_buffer[i] =' ';
 	}
@@ -168,6 +168,7 @@ void Empleado::Pack() {
 
 
 void Empleado::Write() {
+	cout << "Cedula: " << flush; cin.getline(cedula, sizeof(cedula));
 	cout << "Nombres: " << flush; cin.getline(nombre, sizeof(nombre));
 	cout << "Apellidos: " << flush; cin.getline(Apellido, sizeof(Apellido));
 	cout << "Direccion: " << flush; cin.getline(direccion, sizeof(direccion));
