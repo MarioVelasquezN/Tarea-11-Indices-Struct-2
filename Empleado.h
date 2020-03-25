@@ -8,7 +8,7 @@
 #pragma warning (disable : 4996)
 #pragma pack(1)
 //15*3+20+4
-#define MAX_BUFFER 64
+#define MAX_BUFFER 100
 
 using namespace std;
 
@@ -22,6 +22,7 @@ private:
 public:
 	int SIZE;
 	char in_buffer[MAX_BUFFER];
+	char cedula[13];
 	char nombre[10];
 	char Apellido[10];
 	char direccion[15];
