@@ -13,7 +13,7 @@ void ReadAll() {
 
 	Empleado p;
 	ifstream f;
-	cout << "Nombres  Apellidos  Direccion Ciudad Estado ZipCode" << endl;
+	cout << "Cedula	Nombres  Apellidos  Direccion Ciudad Estado ZipCode" << endl;
 
 	f.open("empleado.txt",ios::in);
 	if (f.fail()) {
@@ -180,10 +180,10 @@ int main(/*int argc, char **argv*/) {
 	Empleado p;
 
 	/*if (strcmp(argv[1], "1") == 0)*/ //WriteAll(); 
-	/*if (strcmp(argv[1], "2") == 0)*/ //ReadAll();
+	/*if (strcmp(argv[1], "2") == 0)*/ ReadAll();
 	cout << endl;
-	/*if (strcmp(argv[1], "3") == 0)*/ //p.GetEmpleadoByName("daniel");
+	/*if (strcmp(argv[1], "3") == 0)*/ //p.GetEmpleadoByName("Wilmer");
 	cout << endl;
 	/*if (strcmp(argv[1], "4") == 0)*/ //p.EliminarRegistro();
-	p.Compactar();
+	//p.Compactar();
 }
