@@ -1,5 +1,6 @@
 #include "Empleado.h"
 #include <sstream>
+#include <fstream>
 #pragma warning (disable : 4996)
 using namespace std;
 
@@ -17,14 +18,14 @@ Empleado::Empleado() {
 }
 
 void Empleado::Print() {
-	cout <<cedula<<" "
+	cout << cedula << " "
 		<< nombre << " "
 		<< Apellido << " "
 		<< direccion << " "
 		<< ciudad << " "
 		<< estado << " "
 		<< zipCode << "\n"
-		<<flush;
+		<< flush;
 }
 
 
@@ -38,7 +39,7 @@ void Empleado::unPack() {
 	char se = '|';
 	char temp[30];
 	char *c = in_buffer;
-	size_t j=0;
+	size_t j = 0;
 	int pos = 0;
 
 	for (size_t i = 0; c[i] != se; i++)
@@ -55,20 +56,20 @@ void Empleado::unPack() {
 	j = 0;
 	pos = pos + 1;
 
-	for (size_t i = pos; c[i]!=se ; i++)
+	for (size_t i = pos; c[i] != se; i++)
 	{
 		temp[j] = c[i];
-		
+
 		j++;
 		pos++;
 	}
 	temp[j] = '\0';
-	
+
 	strcpy(nombre, temp);
 
 	j = 0;
-	pos=pos + 1;
-	for (size_t i =pos ; c[i]!=se; i++)
+	pos = pos + 1;
+	for (size_t i = pos; c[i] != se; i++)
 	{
 		temp[j] = c[i];
 		j++;
@@ -79,7 +80,7 @@ void Empleado::unPack() {
 
 	j = 0;
 	pos = pos + 1;
-	for (size_t i = pos;c[i]!=se; i++)
+	for (size_t i = pos; c[i] != se; i++)
 	{
 		temp[j] = c[i];
 		j++;
@@ -112,6 +113,7 @@ void Empleado::unPack() {
 
 	j = 0;
 	pos = pos + 1;
+
 	for (size_t i = pos; c[i] != se; i++)
 	{
 		temp[j] = c[i];
@@ -122,39 +124,29 @@ void Empleado::unPack() {
 	strcpy(zipCode, temp);
 
 
-	
+
 }
 
 void Empleado::Pack() {
-	
+
 	strcat(in_buffer, cedula);
 	strcat(in_buffer, "|");
 
 	strcat(in_buffer, nombre);
 	strcat(in_buffer, "|");
 
-	
-	
 	strcat(in_buffer, Apellido);
 	strcat(in_buffer, "|");
 
-
-	
 	strcat(in_buffer, direccion);
 	strcat(in_buffer, "|");
 
-	
-	
 	strcat(in_buffer, ciudad);
 	strcat(in_buffer, "|");
 
-	
-	
 	strcat(in_buffer, estado);
 	strcat(in_buffer, "|");
 
-
-	
 	strcat(in_buffer, zipCode);
 	strcat(in_buffer, "|");
 
@@ -162,7 +154,7 @@ void Empleado::Pack() {
 
 	for (size_t i = SIZE; i < MAX_BUFFER; i++)
 	{
-		in_buffer[i] =' ';
+		in_buffer[i] = ' ';
 	}
 }
 
@@ -172,7 +164,7 @@ void Empleado::Write() {
 	cout << "Nombres: " << flush; cin.getline(nombre, sizeof(nombre));
 	cout << "Apellidos: " << flush; cin.getline(Apellido, sizeof(Apellido));
 	cout << "Direccion: " << flush; cin.getline(direccion, sizeof(direccion));
-	cout << "Ciudad: " << flush; cin.getline(ciudad,sizeof(ciudad));
+	cout << "Ciudad: " << flush; cin.getline(ciudad, sizeof(ciudad));
 	cout << "Estado: " << flush; cin.getline(estado, sizeof(estado));
 	cout << "Zip Code: " << flush; cin.getline(zipCode, sizeof(zipCode));
 	cin.ignore(numeric_limits <streamsize> ::max(), '\n');
